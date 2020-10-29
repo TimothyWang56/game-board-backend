@@ -1,9 +1,14 @@
 # coding=utf-8
 
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, Table, ForeignKey
 from sqlalchemy.orm import relationship, backref
 
 from base import Base
+
+league_member_association = Table('league_members', Base.metadata,
+    Column('league_id', Integer, ForeignKey('leagues.id')),
+    Column('user_id', Integer, ForeignKey('users.id'))
+)
 
 class League(Base):
     __tablename__ = 'leagues'
@@ -11,11 +16,17 @@ class League(Base):
     id = Column(Integer, primary_key=True)
     league_name = Column(String)
     game_name = Column(String)
-    
+
     games = relationship(
         "Game", back_populates="league",
         cascade="all, delete",
         passive_deletes=True
+    )
+
+    members = relationship(
+        "User",
+        secondary=league_member_association,
+        back_populates="leagues"
     )
 
     def __init__(self, league_name, game_name):
