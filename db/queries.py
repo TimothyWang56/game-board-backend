@@ -1,9 +1,9 @@
 # coding=utf-8
 
-from base import Session
-from user import User
-from game import Game
-from league import League
+from db.base import Session
+from db.user import User
+from db.game import Game
+from db.league import League
 
 session = Session()
 
@@ -35,4 +35,5 @@ for user in users:
     print(f'{user.id}, {user.username}')
     for league in user.leagues:
         print(f'\t{league.league_name}')
+    print(user.check_password('password1'))
 print('')

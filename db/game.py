@@ -3,7 +3,7 @@
 from sqlalchemy import Column, String, Integer, DateTime, Table, ForeignKey
 from sqlalchemy.orm import relationship
 
-from base import Base
+from db.base import Base
 
 class Game(Base):
     __tablename__ = 'games'

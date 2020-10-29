@@ -4,9 +4,9 @@ from sqlalchemy import Column, String, Integer, Table, Binary
 from sqlalchemy.orm import relationship, backref
 import bcrypt
 
-from base import Base
+from db.base import Base
 
-from league import league_member_association
+from db.league import league_member_association
 
 class User(Base):
     __tablename__ = 'users'

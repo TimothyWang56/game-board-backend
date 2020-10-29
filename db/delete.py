@@ -1,9 +1,9 @@
 # coding=utf-8
 
-from base import Session
-from game import Game
-from user import User
-from league import League
+from db.base import Session
+from db.game import Game
+from db.user import User
+from db.league import League
 
 session = Session()
 
