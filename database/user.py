@@ -16,7 +16,8 @@ class User(Base):
     leagues = relationship(
         "League",
         secondary=league_member_association,
-        back_populates="members"
+        back_populates="members",
+        passive_deletes=True
     )
 
     def __init__(self, username):

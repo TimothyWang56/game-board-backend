@@ -6,8 +6,8 @@ from sqlalchemy.orm import relationship, backref
 from base import Base
 
 league_member_association = Table('league_members', Base.metadata,
-    Column('league_id', Integer, ForeignKey('leagues.id')),
-    Column('user_id', Integer, ForeignKey('users.id'))
+    Column('league_id', Integer, ForeignKey('leagues.id', ondelete="CASCADE")),
+    Column('user_id', Integer, ForeignKey('users.id', ondelete="CASCADE"))
 )
 
 class League(Base):
@@ -26,7 +26,8 @@ class League(Base):
     members = relationship(
         "User",
         secondary=league_member_association,
-        back_populates="leagues"
+        back_populates="leagues",
+        passive_deletes=True
     )
 
     def __init__(self, league_name, game_name):
