@@ -13,7 +13,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True)
-    passhash = Column(Binary)
+    passhash = Column(Binary(60))
 
     leagues = relationship(
         "League",
