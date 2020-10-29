@@ -24,7 +24,7 @@ games = session.query(Game).all()
 
 print('\n### All games:')
 for game in games:
-    print(f'{game.date}')
+    print(f'{game.date}, {game.winner}')
 print('')
 
 # print users
