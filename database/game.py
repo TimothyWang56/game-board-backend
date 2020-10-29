@@ -12,7 +12,8 @@ class Game(Base):
     league_id = Column(Integer, ForeignKey('leagues.id', ondelete="CASCADE"))
     league = relationship("League", back_populates="games")
     date = Column(DateTime)
-    # winner = Column(String, ForeignKey('users.id'), nullable=True)
+    winner = Column(Integer, ForeignKey('users.id', ondelete="SET NULL"), nullable=True)
 
-    def __init__(self, date):
+    def __init__(self, date, winner=None):
         self.date = date
+        self.winner = winner
