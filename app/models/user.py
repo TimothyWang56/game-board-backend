@@ -58,8 +58,8 @@ class User(Base):
     def decode_auth_token(token):
         try:
             payload = jwt.decode(token, SECRET_KEY)
-            return payload['sub']
+            return {'authorized': True, 'content': payload['sub']}
         except jwt.ExpiredSignatureError:
-            return 'Signature expired. Please log in again.'
+            return {'authorized': False, 'content': 'Signature expired. Please log in again.'}
         except jwt.InvalidTokenError:
-            return 'Invalid token. Please log in again.'
+            return {'authorized': False, 'content': 'Invalid token. Please log in again.'}
