@@ -1,6 +1,7 @@
 from flask import Blueprint, request, abort, jsonify, Response
 from functools import wraps
 from app.services.user import authenticate_user
+from app.services.league import league_data
 
 league_api = Blueprint('league_api', __name__)
 
@@ -17,6 +18,10 @@ def authenticate(f):
 
 @league_api.route('/<string:user_id>', methods=['GET'])
 @authenticate
-def getLeagueData(user_id):
-    print(user_id)
-    return jsonify({'hi': 'hi'}), 200
+def get_league_data(user_id):
+    res = league_data(user_id)
+
+    if (not res['success']):
+        abort(401)
+
+    return jsonify(res['data']), 200
