@@ -1,16 +1,7 @@
 from flask import Blueprint, request, abort, jsonify, Response
 from app.services.user import register_user, login_user
-from functools import wraps
 
 auth_api = Blueprint('auth_api', __name__)
-
-def authenticate(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        #todo - authenticate
-        return f(*args, **kwargs)
-    return wrapper
-
 
 @auth_api.route('/register', methods = ['POST'])
 def register():
