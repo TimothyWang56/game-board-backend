@@ -10,6 +10,7 @@ sqlalchemy = "*"
 psycopg2 = "*"
 bcrypt = "*"
 flask = "*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.8"
