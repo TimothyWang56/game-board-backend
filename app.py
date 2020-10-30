@@ -20,10 +20,11 @@ def login():
     password = request.json.get('password')
     if username is None or password is None:
         abort(400) # missing arguments
-    if not login_user(username, password):
+    token = login_user(username, password)
+    if not token:
         abort(401) # existing user
     # potentially send a cookie to save info?
-    return jsonify({ 'username': username }), 200
+    return jsonify({ 'token': token }), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
