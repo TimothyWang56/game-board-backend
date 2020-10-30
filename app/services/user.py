@@ -37,3 +37,6 @@ def login_user(username, password):
 
     session.close()
     return token
+
+def authenticate_user(token):
+    return User.decode_auth_token(token)
