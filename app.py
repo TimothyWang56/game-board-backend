@@ -1,7 +1,16 @@
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, abort, jsonify, Response
 from funcs.user_funcs import register_user, login_user
+from functools import wraps
 
 app = Flask(__name__)
+
+def authenticate(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        #todo - authenticate
+        return f(*args, **kwargs)
+    return wrapper
+
 
 @app.route('/register', methods = ['POST'])
 def register():
