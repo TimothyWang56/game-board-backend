@@ -8,9 +8,9 @@ from app.models.user import User
 Base.metadata.create_all(engine)
 
 def register_user(username, password):
-    if (len(username) < 3):
+    if (len(username) < 5):
         return False
-    if (len(password) < 8):
+    if (len(password) < 6):
         return False
 
     session = Session()
