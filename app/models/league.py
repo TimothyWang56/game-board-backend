@@ -3,7 +3,7 @@
 from sqlalchemy import Column, String, Integer, Table, ForeignKey
 from sqlalchemy.orm import relationship, backref
 
-from db.base import Base
+from app.models.base import Base
 
 league_member_association = Table('league_members', Base.metadata,
     Column('league_id', Integer, ForeignKey('leagues.id', ondelete="CASCADE")),

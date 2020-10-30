@@ -3,10 +3,10 @@
 # 1 - imports
 from datetime import datetime
 
-from db.base import Session, engine, Base
-from db.game import Game
-from db.league import League
-from db.user import User
+from app.models.base import Session, engine, Base
+from app.models.game import Game
+from app.models.league import League
+from app.models.user import User
 
 # 2 - generate database schema
 Base.metadata.create_all(engine)

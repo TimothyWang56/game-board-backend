@@ -1,9 +1,9 @@
 # coding=utf-8
 
-from db.base import Session
-from db.user import User
-from db.game import Game
-from db.league import League
+from app.models.base import Session
+from app.models.user import User
+from app.models.game import Game
+from app.models.league import League
 
 session = Session()
 

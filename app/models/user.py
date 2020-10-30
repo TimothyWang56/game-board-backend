@@ -6,11 +6,11 @@ from datetime import datetime, timedelta
 import bcrypt
 import jwt
 
-from db.base import Base
+from app.models.base import Base
 
-from db.config import SECRET_KEY
+from app.models.config import SECRET_KEY
 
-from db.league import league_member_association
+from app.models.league import league_member_association
 
 class User(Base):
     __tablename__ = 'users'

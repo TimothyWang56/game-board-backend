@@ -1,8 +1,8 @@
-from flask import Flask, request, abort, jsonify, Response
-from funcs.user_funcs import register_user, login_user
+from flask import Blueprint, request, abort, jsonify, Response
+from app.services.user import register_user, login_user
 from functools import wraps
 
-app = Flask(__name__)
+auth_api = Blueprint('auth_api', __name__)
 
 def authenticate(f):
     @wraps(f)
@@ -12,7 +12,7 @@ def authenticate(f):
     return wrapper
 
 
-@app.route('/register', methods = ['POST'])
+@auth_api.route('/register', methods = ['POST'])
 def register():
     username = request.json.get('username')
     password = request.json.get('password')
@@ -23,7 +23,7 @@ def register():
     # potentially send a cookie to save info?
     return jsonify({ 'username': username }), 201
 
-@app.route('/login', methods = ['POST'])
+@auth_api.route('/login', methods = ['POST'])
 def login():
     username = request.json.get('username')
     password = request.json.get('password')
@@ -34,6 +34,3 @@ def login():
         abort(401) # existing user
     # potentially send a cookie to save info?
     return jsonify({ 'token': token }), 200
-
-if __name__ == '__main__':
-    app.run(debug=True)
