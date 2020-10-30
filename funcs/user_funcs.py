@@ -29,9 +29,11 @@ def register_user(username, password):
 def login_user(username, password):
     session = Session()
     users = session.query(User).filter(User.username == username).all()
-    if len(users) == 0:
-        return False
+    token = ''
+    if len(users) != 0:
+        user = users[0]
+        if (user.check_password(password)):
+            token = user.encode_auth_token()
 
-    user = users[0]
     session.close()
-    return user.check_password(password)
+    return token
