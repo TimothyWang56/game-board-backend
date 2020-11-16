@@ -20,7 +20,8 @@ class League(Base):
     games = relationship(
         "Game", back_populates="league",
         cascade="all, delete",
-        passive_deletes=True
+        passive_deletes=True,
+        order_by='Game.date.desc()'
     )
 
     members = relationship(
