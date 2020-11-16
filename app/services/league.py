@@ -13,11 +13,14 @@ def extract_winner(game):
     else:
         return None
 
+def extract_players(game):
+    return [player.id for player in game.players]
+
 def extract_league_info(league_data):
     return {league.id : {'id': league.id, 'name': league.league_name, 'members': [member.id for member in league.members]} for league in league_data}
 
 def extract_league_games(league_data):
-    return {league.id : [{'time': game.date.isoformat(), 'gameId': game.id, 'winner': extract_winner(game)} for game in league.games] for league in league_data}
+    return {league.id : [{'time': game.date.isoformat(), 'gameId': game.id, 'winner': extract_winner(game), 'players': extract_players(game)} for game in league.games] for league in league_data}
 
 def extract_user_data(users):
     return {user.id : {'userId': user.id, 'username': user.username} for user in users}
