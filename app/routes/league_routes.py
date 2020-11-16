@@ -10,7 +10,6 @@ def authenticate(f):
     def wrapper(*args, **kwargs):
         token = request.cookies.get('Authorization')
         auth = authenticate_user(token)
-        print("auth: ", auth)
         if (not auth['authorized']):
             return Response('Authorization failed', 401)
         request.user = auth['content']
