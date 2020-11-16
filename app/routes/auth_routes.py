@@ -23,7 +23,6 @@ def login():
     token = login_user(username, password)
     if not token:
         abort(401) # existing user
-    # potentially send a cookie to save info?
 
     res = jsonify({ 'token': token })
     res.set_cookie('Authorization', token)
