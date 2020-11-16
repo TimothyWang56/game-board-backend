@@ -8,7 +8,7 @@ league_api = Blueprint('league_api', __name__)
 def authenticate(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        token = request.headers['Authorization']
+        token = request.cookies.get('Authorization')
         auth = authenticate_user(token)
         print("auth: ", auth)
         if (not auth['authorized']):
@@ -17,15 +17,13 @@ def authenticate(f):
         return f(*args, **kwargs)
     return wrapper
 
-@league_api.route('/<string:user_id>', methods=['GET'])
+@league_api.route('', methods=['GET'])
 @authenticate
-def get_league_data(user_id):
-    # verify request is from the correct user
-    if not (user_id == str(request.user)):
-        abort(401)
+def get_league_data():
+    user_id = int(request.user);
 
     res = league_data(user_id)
     if (not res['success']):
         abort(500)
 
-    return jsonify(res['data']), 200
+    return res, 200
