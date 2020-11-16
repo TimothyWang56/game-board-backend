@@ -24,4 +24,8 @@ def login():
     if not token:
         abort(401) # existing user
     # potentially send a cookie to save info?
-    return jsonify({ 'token': token }), 200
+
+    res = jsonify({ 'token': token })
+    res.set_cookie('Authorization', token)
+
+    return res, 200
